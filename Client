@@ -1,0 +1,19 @@
+import socket
+import multiprocessing as mp
+
+def main():
+    client_socket= socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client_socket.connect(('192.168.23.133', 8080))
+
+    print("\nNumber of processor:", mp.cpu_count())
+
+    user_input = input("\nClient: ")
+    client_socket.send(user_input.encode())
+
+    data = client_socket.recv(1024).decode()
+    print("Server:", data, "\n")
+
+    client_socket.close()
+
+if _name_ == "_main_":
+    main()
